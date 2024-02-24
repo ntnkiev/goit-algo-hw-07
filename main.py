@@ -33,7 +33,7 @@ class Phone(Field):
 class Birthday(Field):
     def __init__(self, value):
         try:
-            self.value = datetime.strptime(value, "%d.%m.%Y")
+            self.value = datetime.strptime(value, "%d.%m.%Y") #перевірка формату дати
         except ValueError:
             raise ValueError("Invalid date format. Use DD.MM.YYYY")
         
@@ -45,7 +45,7 @@ class Record:
         self.name = Name(name) 
         self.phones = []
         self.birthday = None
-        # self.emails = []
+        # self.email = []
 
     @input_error
     def add_phone(self, phone):
@@ -62,16 +62,16 @@ class Record:
         return None
     
     @input_error
-    def remove_phone(self, phone):
+    def remove_phone(self, phone): #видалення номеру телефона
         i = self.find_in_list(phone)
         if i != None:
-            del self.phones[i]
+            del self.phones[i] 
             print(f'Phone number {phone} was delated from {self.name.value} contact.')
         else:
             return f"Phone {phone} not found in {self.name} contact"
         
     @input_error
-    def edit_phone(self, old_phone, new_phone):
+    def edit_phone(self, old_phone, new_phone): #зміна номеру телефона
         i = self.find_in_list(old_phone)
         if i != None:
             self.phones[i].value = new_phone
@@ -81,13 +81,13 @@ class Record:
 
     @input_error
     def find_phone(self, phone):
-        if phone in map(str, self.phones):
+        if phone in map(str, self.phones): #пошук номеру телефона в контакті
             return phone   
         else: 
             return f"Phone {phone} not found in {self.name} contact"
 
     @input_error
-    def contact_phone(self, name):
+    def contact_phone(self, name): #номери телефонів контакта
         phones = ""
         phones = f'{self.name.value} : '
         for phone in self.phones:
@@ -95,12 +95,12 @@ class Record:
         return phones 
 
     @input_error
-    def add_birthday(self, bday):
+    def add_birthday(self, bday): #додавання дня народження
         self.birthday = Birthday(bday)
         return f'Birthday for contact {self.name.value} added'
 
     @input_error
-    def show_birthday(self):
+    def show_birthday(self): #день народження контакта
         return f'{self.name.value} birthday at {self.birthday.value.strftime("%d.%m.%Y")}'
 
     def __str__(self):
