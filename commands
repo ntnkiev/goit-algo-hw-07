@@ -1,0 +1,11 @@
+add ntn 1234567890
+add-birthday ntn 25.02.1972
+add tnt 0987654321
+add-birthday tnt 28.02.1975
+change ntn 1234567890 1122334455
+phone tnt
+show-birthday ntn
+birthdays
+
+
+
